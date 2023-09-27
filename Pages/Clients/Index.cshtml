@@ -1,0 +1,49 @@
+@page
+@model RazorTeste.Pages_Clients.IndexModel
+
+@{
+    ViewData["Title"] = "Lista de clientes";
+}
+
+<h1>Lista de Clientes</h1>
+
+<p>
+    <a asp-page="Create">Novo cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                E-Mail
+            </th>
+            <th>
+                Celular
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Client)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CellPhone)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Visualizar</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
