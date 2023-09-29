@@ -26,7 +26,6 @@ namespace RazorTeste.Pages_Orders
             }
 
             var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
-
             if (order == null) return NotFound();
 
             Order = order;
@@ -42,7 +41,6 @@ namespace RazorTeste.Pages_Orders
             }
 
             var order = await _context.Orders.FindAsync(id);
-
             if (order != null)
             {
                 Order = order;

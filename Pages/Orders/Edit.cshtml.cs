@@ -47,8 +47,7 @@ namespace RazorTeste.Pages_Orders
 
             try
             {
-                Order.Amount = (Order.Product.Price * Order.Quantity);
-
+                Order.Amount = AtualizaValorPedido(Order.ProductId, Order.Quantity);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -64,6 +63,14 @@ namespace RazorTeste.Pages_Orders
             }
 
             return RedirectToPage("./Index");
+        }
+
+        private double AtualizaValorPedido(int productId, int quantity)
+        {
+            var _produto = _context.Products.FirstOrDefault(p => p.Id == productId);
+            if (_produto == null) return 0;
+
+            return _produto.Price * quantity;
         }
 
         private bool OrderExists(int id)

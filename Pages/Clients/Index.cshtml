@@ -1,49 +1,55 @@
 @page
 @model RazorTeste.Pages_Clients.IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Lista de clientes";
 }
 
-<h1>Lista de Clientes</h1>
+<h1>Clientes</h1>
 
-<p>
-    <a asp-page="Create">Novo cliente</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Nome
-            </th>
-            <th>
-                E-Mail
-            </th>
-            <th>
-                Celular
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Client)
-        {
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-page="Create">Novo cliente</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CellPhone)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Visualizar</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
-                </td>
+                <th>Nome</th>
+                <th>E-Mail</th>
+                <th>Celular</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Client)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CellPhone)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Visualizar</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>
+        Para acessar essa página você precisa fazer o <a asp-area="Identity" asp-page="/Account/Login">login</a>!
+    </div>
+}

@@ -44,6 +44,7 @@
                     <span asp-validation-for="Order.DateOrder" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <br />
                     <input type="submit" value="Salvar" class="btn btn-primary" />
                 </div>
             </form>
@@ -57,7 +58,6 @@
 else
 {
     <div>
-        Para acessar essa página você precisa fazer o
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">login</a>!
+        Para acessar essa página você precisa fazer o <a asp-area="Identity" asp-page="/Account/Login">login</a>!
     </div>
 }

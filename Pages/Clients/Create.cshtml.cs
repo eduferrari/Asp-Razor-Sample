@@ -29,10 +29,18 @@ namespace RazorTeste.Pages_Clients
                 return Page();
             }
 
+            if (ValidaSeCadastroExiste(Client.Email))
+            {
+                ModelState.AddModelError("", "Já existe um cliente cadastrado com esse e-mail!");
+                return Page();
+            }
+
             _context.Clients.Add(Client);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
         }
+
+        private bool ValidaSeCadastroExiste(string email) =>
+            _context.Clients.Where(x => x.Email == email).Any();
     }
 }

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorTeste.Data;
@@ -12,9 +7,9 @@ namespace RazorTeste.Pages_Products
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorTeste.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(RazorTeste.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,10 +18,7 @@ namespace RazorTeste.Pages_Products
 
         public async Task OnGetAsync()
         {
-            if (_context.Products != null)
-            {
-                Product = await _context.Products.ToListAsync();
-            }
+            if (_context.Products != null) Product = await _context.Products.ToListAsync();
         }
     }
 }
